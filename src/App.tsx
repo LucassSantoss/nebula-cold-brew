@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Navbar } from './components/Navbar'
 import { startSmoothScroll } from './lib/gsap'
 import { useReducedMotion } from './lib/useReducedMotion'
@@ -10,6 +10,9 @@ import { Ice } from './sections/Ice'
 import { Process } from './sections/Process'
 import { Stats } from './sections/Stats'
 import { Testimonials } from './sections/Testimonials'
+
+// Three.js is by far the heaviest dependency, so it loads in its own chunk.
+const Scene = lazy(() => import('./components/three/Scene'))
 
 export default function App() {
   const reducedMotion = useReducedMotion()
@@ -38,6 +41,9 @@ export default function App() {
         <FinalCta />
       </main>
       <Footer />
+      <Suspense fallback={null}>
+        <Scene />
+      </Suspense>
     </>
   )
 }
