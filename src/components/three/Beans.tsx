@@ -69,18 +69,38 @@ function createBeanGeometry() {
   return geometry
 }
 
-function createBeans(count: number): Bean[] {
+/**
+ * Keeps beans off the hero copy and the can. Coordinates are viewport
+ * fractions with the origin at the center and y pointing up.
+ */
+function isBlocked(x: number, y: number, layerIndex: number, compact: boolean): boolean {
+  // The front layer is closer to the camera than the can, so keep it off the can too.
+  if (layerIndex === 2 && Math.abs(x) < (compact ? 0.34 : 0.17)) return true
+  if (compact) {
+    // Small screens: title on top, paragraph and button at the bottom.
+    return y < -0.2 || (layerIndex > 0 && y > 0.14)
+  }
+  const overTitle = Math.abs(x) < 0.44 && Math.abs(y) < 0.2
+  const overParagraph = x < -0.16 && y < -0.24
+  return overParagraph || (layerIndex > 0 && overTitle)
+}
+
+function createBeans(count: number, compact: boolean): Bean[] {
   const beans: Bean[] = []
   LAYERS.forEach((layer, layerIndex) => {
     const amount = Math.round(count * layer.share)
     for (let i = 0; i < amount; i++) {
-      // Keep the front layer away from the center so it never covers the can.
-      const minX = layerIndex === 2 ? 0.22 : 0.05
-      const side = Math.random() < 0.5 ? -1 : 1
+      let x = 0
+      let y = 0
+      for (let attempt = 0; attempt < 30; attempt++) {
+        x = MathUtils.randFloatSpread(1.12)
+        y = MathUtils.randFloatSpread(1.1)
+        if (!isBlocked(x, y, layerIndex, compact)) break
+      }
       beans.push({
         layer: layerIndex,
-        x: side * MathUtils.randFloat(minX, 0.56),
-        y: MathUtils.randFloat(-0.55, 0.55),
+        x,
+        y,
         size: layer.size * MathUtils.randFloat(0.7, 1.25),
         phase: Math.random() * Math.PI * 2,
         floatSpeed: MathUtils.randFloat(0.25, 0.6),
@@ -105,11 +125,11 @@ export function Beans() {
   const reducedMotion = useReducedMotion()
   const isWide = useMediaQuery('(min-width: 1280px)')
   const isMedium = useMediaQuery('(min-width: 768px)')
-  const count = isWide ? 90 : isMedium ? 60 : 36
+  const count = isWide ? 80 : isMedium ? 52 : 28
 
   const geometry = useMemo(() => createBeanGeometry(), [])
   const material = useMemo(() => new MeshStandardMaterial({ roughness: 0.48, metalness: 0.2 }), [])
-  const beans = useMemo(() => createBeans(count), [count])
+  const beans = useMemo(() => createBeans(count, !isMedium), [count, isMedium])
   // Per-bean push away from the pointer, smoothed over time (x, y pairs).
   const push = useMemo(() => new Float32Array(beans.length * 2), [beans])
   const drift = useRef({ x: 0, y: 0 })
@@ -135,6 +155,8 @@ export function Beans() {
     const time = reducedMotion ? 0 : clock.elapsedTime
     const fovScale = 2 * Math.tan(MathUtils.degToRad((camera as PerspectiveCamera).fov) / 2)
     const aspect = size.width / size.height
+    // Beans are sized for landscape screens; shrink them on narrow viewports.
+    const sizeScale = MathUtils.clamp(aspect / 1.5, 0.5, 1)
     const ringRadius = RING_RADIUS * fovScale * camera.position.z
     const burst = sceneMotion.beanBurst
 
@@ -185,7 +207,9 @@ export function Beans() {
         bean.phase * 2 + time * bean.spin[1],
         bean.phase * 3 + time * bean.spin[2],
       )
-      dummy.scale.setScalar(bean.size * MathUtils.lerp(0.25, 1, progress) * Math.min(1, burst * 20))
+      dummy.scale.setScalar(
+        bean.size * sizeScale * MathUtils.lerp(0.25, 1, progress) * Math.min(1, burst * 20),
+      )
       dummy.updateMatrix()
       instanced.setMatrixAt(index, dummy.matrix)
     })

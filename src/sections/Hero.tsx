@@ -87,11 +87,12 @@ export function Hero() {
       {/*
         Mobile: three centered lines above the can.
         Desktop: two rows split around the can, which sits in the column gap.
+        Copy sits above the WebGL layer (z-20) so beans drift behind it.
       */}
       <h1
         id="top-title"
         aria-label="Café gelado de outra galáxia"
-        className="display flex flex-wrap justify-center gap-x-[0.22em] text-[15.5vw] leading-[1.18] md:absolute md:inset-x-10 md:top-1/2 md:grid md:-translate-y-[54%] md:grid-cols-2 md:gap-x-[calc(64svh*0.4115+7vw)] md:text-[clamp(4rem,8.8vw,11rem)]"
+        className="display relative z-30 flex flex-wrap justify-center gap-x-[0.22em] text-[15.5vw] leading-[1.18] md:absolute md:inset-x-10 md:top-1/2 md:grid md:-translate-y-[54%] md:grid-cols-2 md:gap-x-[calc(64svh*0.4115+7vw)] md:text-[clamp(4rem,8.8vw,11rem)]"
       >
         <span data-title-left className="md:text-right">
           <SplitText text="Café" />
@@ -113,7 +114,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div data-hero-exit className="relative mt-auto flex items-end justify-between gap-8">
+      <div data-hero-exit className="relative z-30 mt-auto flex items-end justify-between gap-8">
         <div className="max-w-sm">
           <p data-hero-fade className="text-ink-muted">
             Cold brew extraído a frio por 12 horas e enlatado no ponto exato. Encorpado, cremoso e
