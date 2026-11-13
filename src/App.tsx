@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { Navbar } from './components/Navbar'
 import { startSmoothScroll } from './lib/gsap'
+import { setState } from './lib/store'
 import { useReducedMotion } from './lib/useReducedMotion'
 import { FinalCta } from './sections/FinalCta'
 import { Flavors } from './sections/Flavors'
@@ -21,6 +22,11 @@ export default function App() {
     if (reducedMotion) return
     return startSmoothScroll()
   }, [reducedMotion])
+
+  // Until the preloader exists, intro animations start as soon as fonts are in.
+  useEffect(() => {
+    document.fonts.ready.then(() => setState({ introDone: true }))
+  }, [])
 
   return (
     <>

@@ -53,6 +53,17 @@
   --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-scroll-hint: scroll-hint 2s var(--ease-out-expo) infinite;
+
+  @keyframes scroll-hint {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(200%);
+    }
+  }
 }
 
 @layer base {
