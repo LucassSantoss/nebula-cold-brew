@@ -5,4 +5,9 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    // three.js alone is ~700 kB minified. It ships in its own lazy chunk (the
+    // WebGL scene), so the default 500 kB warning is expected there, not a regression.
+    chunkSizeWarningLimit: 1000,
+  },
 })
