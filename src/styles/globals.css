@@ -1,0 +1,110 @@
+@import 'tailwindcss';
+
+/* Self-hosted Google Fonts (latin subset only) to avoid third-party requests. */
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('@fontsource/anton/files/anton-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Manrope Variable';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+:root {
+  /* Brand tokens */
+  --bg: #0e0a08;
+  --surface: #1c1410;
+  --cream: #f3e6d3;
+  --accent: #c8873a;
+  --muted: #8a7663;
+
+  /* Live page theme. Rewritten at runtime as sections and flavors change. */
+  --page-bg: var(--bg);
+  --page-fg: var(--cream);
+  --page-muted: var(--muted);
+  --page-accent: var(--accent);
+  --page-accent-ink: var(--bg);
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-cream: var(--cream);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+
+  --color-page: var(--page-bg);
+  --color-ink: var(--page-fg);
+  --color-ink-muted: var(--page-muted);
+  --color-pop: var(--page-accent);
+  --color-pop-ink: var(--page-accent-ink);
+
+  --font-display: 'Anton', 'Arial Narrow', Impact, sans-serif;
+  --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    background-color: var(--page-bg);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--page-bg);
+    color: var(--page-fg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 1.125rem;
+    }
+  }
+
+  ::selection {
+    background-color: var(--page-accent);
+    color: var(--page-accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--page-fg);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+}
+
+/* Big condensed uppercase headings. */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+/* Small uppercase label used above headings. */
+@utility eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
