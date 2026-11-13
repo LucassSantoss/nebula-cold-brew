@@ -5,9 +5,11 @@ type State = {
   flavor: number
   /** True once the preloader is gone and intro animations may run. */
   introDone: boolean
+  /** True once the WebGL scene has rendered its first frame. */
+  sceneReady: boolean
 }
 
-let state: State = { flavor: 0, introDone: false }
+let state: State = { flavor: 0, introDone: false, sceneReady: false }
 const listeners = new Set<() => void>()
 
 export function getState(): State {

@@ -1,7 +1,8 @@
 import { Environment, Lightformer } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { use, useEffect, useState } from 'react'
 import { NeutralToneMapping } from 'three'
+import { getState, setState } from '../../lib/store'
 import { Beans } from './Beans'
 import { CanRig } from './CanRig'
 
@@ -26,6 +27,14 @@ function StudioEnvironment() {
       <Lightformer form="ring" intensity={2.5} color="#ffe9cc" position={[2, 3, 9]} scale={3} target={[0, 0, 0]} />
     </Environment>
   )
+}
+
+/** Tells the rest of the app when the first frame is on screen. */
+function ReadySignal() {
+  useFrame(() => {
+    if (!getState().sceneReady) setState({ sceneReady: true })
+  })
+  return null
 }
 
 /** True while any section that shows 3D content (`data-3d`) is near the viewport. */
@@ -79,6 +88,7 @@ export default function Scene() {
         <directionalLight position={[4, 6, 8]} intensity={1.6} />
         <CanRig />
         <Beans />
+        <ReadySignal />
       </Canvas>
     </div>
   )
