@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import { MathUtils, type Group, type MeshStandardMaterial } from 'three'
 import { getCanAnchors, type CanAnchorId } from '../../lib/canAnchors'
 import { FLAVORS } from '../../lib/flavors'
+import { getScrollY } from '../../lib/gsap'
 import { pointer } from '../../lib/pointer'
 import { sceneMotion } from '../../lib/sceneMotion'
 import { useReducedMotion } from '../../lib/useReducedMotion'
@@ -94,9 +95,9 @@ export function CanRig() {
 
     // Hero: slow continuous turn. Flavors: face the viewer and sway, so the
     // label stays readable. CTA: turn with the scroll.
-    let idle = time * 0.35 + window.scrollY * 0.0025
+    let idle = time * 0.35 + getScrollY() * 0.0025
     if (activeId === 'flavors') idle = Math.sin(time * 0.6) * 0.28
-    if (activeId === 'cta') idle = window.scrollY * 0.004
+    if (activeId === 'cta') idle = getScrollY() * 0.004
 
     can.position.y += Math.sin(time * 1.1) * 0.1 * scale
     can.rotation.x = -sway.current.y * 0.1

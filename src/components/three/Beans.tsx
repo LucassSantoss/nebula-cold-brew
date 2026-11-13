@@ -10,6 +10,7 @@ import {
   type PerspectiveCamera,
 } from 'three'
 import { mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
+import { getScrollY } from '../../lib/gsap'
 import { pointer } from '../../lib/pointer'
 import { sceneMotion } from '../../lib/sceneMotion'
 import { useMediaQuery } from '../../lib/useMediaQuery'
@@ -148,7 +149,7 @@ export function Beans() {
     if (!instanced) return
 
     // Beans belong to the hero: once it has scrolled away there is nothing to draw.
-    const scroll = window.scrollY / size.height
+    const scroll = getScrollY() / size.height
     instanced.visible = scroll < 1.6
     if (!instanced.visible) return
 

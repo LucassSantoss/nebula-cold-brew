@@ -39,13 +39,21 @@ export function lockScroll(locked: boolean) {
   else lenis?.start()
 }
 
-let lastScrollY = 0
+// Reading window.scrollY inside an animation frame can force a synchronous
+// layout, so the position is captured in the scroll event and reused.
+let scrollY = window.scrollY
+let lastScrollY = scrollY
 let scrollVelocity = 0
+window.addEventListener('scroll', () => (scrollY = window.scrollY), { passive: true })
 gsap.ticker.add((_time, deltaTime) => {
-  const y = window.scrollY
-  scrollVelocity = deltaTime > 0 ? ((y - lastScrollY) / deltaTime) * 1000 : 0
-  lastScrollY = y
+  scrollVelocity = deltaTime > 0 ? ((scrollY - lastScrollY) / deltaTime) * 1000 : 0
+  lastScrollY = scrollY
 })
+
+/** Current vertical scroll position in px, safe to read every frame. */
+export function getScrollY(): number {
+  return scrollY
+}
 
 /** Current scroll velocity in px/s, for both smooth and native scrolling. */
 export function getScrollVelocity(): number {
