@@ -33,6 +33,10 @@ export function Preloader() {
     let cached = false
     let loaded = false
     let value = 0
+    let shown = -1
+    // Nothing behind the loader should take focus or be read out yet.
+    const page = document.getElementById('page')
+    page?.setAttribute('inert', '')
     lockScroll(true)
 
     networkReady.then(() => {
@@ -45,6 +49,7 @@ export function Preloader() {
     const finish = (quick: boolean) => {
       gsap.ticker.remove(tick)
       lockScroll(false)
+      page?.removeAttribute('inert')
       // Starts the hero intro underneath, so the burst and the reveal overlap.
       setState({ introDone: true })
 
@@ -71,7 +76,11 @@ export function Preloader() {
       value += (target - value) * (loaded || timedOut ? 0.16 : 0.07)
       if (value > 99.5) value = 100
 
-      if (count.current) count.current.textContent = String(Math.round(value))
+      const rounded = Math.round(value)
+      if (rounded !== shown && count.current) {
+        shown = rounded
+        count.current.textContent = String(rounded)
+      }
       ring.current?.setAttribute('stroke-dashoffset', String(RING_LENGTH * (1 - value / 100)))
       orbit.current?.setAttribute('transform', `rotate(${value * 3.6} 50 50)`)
 
@@ -82,6 +91,7 @@ export function Preloader() {
     return () => {
       gsap.ticker.remove(tick)
       lockScroll(false)
+      page?.removeAttribute('inert')
     }
   }, [])
 
