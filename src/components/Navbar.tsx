@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { ScrollTrigger, lockScroll } from '../lib/gsap'
 import { BUY_LINK, NAV_LINKS } from '../lib/site'
 import { Logo } from './Logo'
+import { MagneticButton } from './MagneticButton'
 
 const HIDE_AFTER_PX = 120
 
@@ -63,13 +64,15 @@ export function Navbar() {
             ))}
           </ul>
 
-          <a
-            href={BUY_LINK.href}
-            onClick={closeMenu}
-            className="rounded-full bg-pop px-5 py-2.5 text-sm font-bold text-pop-ink"
-          >
-            {BUY_LINK.label}
-          </a>
+          <MagneticButton>
+            <a
+              href={BUY_LINK.href}
+              onClick={closeMenu}
+              className="block rounded-full bg-pop px-5 py-2.5 text-sm font-bold text-pop-ink"
+            >
+              {BUY_LINK.label}
+            </a>
+          </MagneticButton>
 
           <button
             type="button"

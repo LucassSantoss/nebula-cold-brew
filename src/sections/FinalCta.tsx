@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { LiquidButton } from '../components/LiquidButton'
+import { MagneticButton } from '../components/MagneticButton'
 import { SplitText } from '../components/SplitText'
 import { canAnchorRef } from '../lib/canAnchors'
 import { gsap, useGSAP } from '../lib/gsap'
@@ -78,7 +79,9 @@ export function FinalCta() {
           Escolha seu sabor, abra a lata e deixe a gravidade para depois.
         </p>
         <div data-cta-copy className="mt-8 md:mt-10">
-          <LiquidButton onClick={launch}>Quero minha lata</LiquidButton>
+          <MagneticButton strength={0.25}>
+            <LiquidButton onClick={launch}>Quero minha lata</LiquidButton>
+          </MagneticButton>
         </div>
         <p role="status" className="mt-8 min-h-12 max-w-md text-sm text-ink-muted md:mt-14">
           {launched &&

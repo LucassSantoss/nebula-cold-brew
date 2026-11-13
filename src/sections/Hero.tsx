@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { MagneticButton } from '../components/MagneticButton'
 import { SplitText } from '../components/SplitText'
 import { canAnchorRef } from '../lib/canAnchors'
 import { gsap, useGSAP } from '../lib/gsap'
@@ -121,13 +122,16 @@ export function Hero() {
             Cold brew extraído a frio por 12 horas e enlatado no ponto exato. Encorpado, cremoso e
             sem açúcar adicionado.
           </p>
-          <a
-            data-hero-fade
-            href="#sabores"
-            className="mt-5 inline-block rounded-full bg-pop px-7 py-3.5 text-sm font-bold text-pop-ink md:mt-6"
-          >
-            Explorar sabores
-          </a>
+          <div data-hero-fade className="mt-5 md:mt-6">
+            <MagneticButton>
+              <a
+                href="#sabores"
+                className="block rounded-full bg-pop px-7 py-3.5 text-sm font-bold text-pop-ink"
+              >
+                Explorar sabores
+              </a>
+            </MagneticButton>
+          </div>
         </div>
 
         <div
