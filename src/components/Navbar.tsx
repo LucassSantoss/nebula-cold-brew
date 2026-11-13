@@ -41,7 +41,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 text-ink transition-transform duration-500 ease-out-expo focus-within:translate-y-0 ${
+      className={`fixed inset-x-0 top-0 z-50 text-ink transition-transform duration-500 ease-out-expo focus-within:translate-y-0 motion-reduce:transition-none ${
         hidden && !menuOpen ? '-translate-y-full' : 'translate-y-0'
       }`}
     >
