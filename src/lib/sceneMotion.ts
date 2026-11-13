@@ -5,6 +5,10 @@
 export const sceneMotion = {
   /** Extra can rotation in radians, added on top of its idle spin. */
   canSpin: 0,
+  /** Rotation added while the user drags the can sideways. */
+  canDrag: 0,
+  /** Index of the flavor whose label is on the can (swapped mid-spin). */
+  labelFlavor: 0,
   /** 0 = beans packed into the preloader ring, 1 = floating freely. */
   beanBurst: 0,
 }

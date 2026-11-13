@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, type RefObject } from 'react'
 import { LatheGeometry, MeshStandardMaterial, Path, type Texture } from 'three'
 import { CAN_HEIGHT, LID_Y, PAINT_BOTTOM, PAINT_TOP, WALL_BOTTOM, WALL_TOP } from './canDimensions'
 
@@ -52,12 +52,14 @@ function createBottomGeometry() {
 }
 
 type CanProps = {
-  /** Label texture wrapped around the body. */
-  map: Texture
+  /** Label texture the can starts with. */
+  label: Texture
+  /** Gives the parent the printed body's material, to swap its `map` without re-rendering. */
+  labelMaterialRef: RefObject<MeshStandardMaterial | null>
 }
 
 /** Procedural drink can, centered on the origin. */
-export function Can({ map }: CanProps) {
+export function Can({ label, labelMaterialRef }: CanProps) {
   const body = useMemo(() => createBodyGeometry(), [])
   const top = useMemo(() => createTopGeometry(), [])
   const bottom = useMemo(() => createBottomGeometry(), [])
@@ -71,7 +73,7 @@ export function Can({ map }: CanProps) {
     <group position-y={-CAN_HEIGHT / 2}>
       {/* Half a turn so the label front (center of the texture) faces +Z. */}
       <mesh geometry={body} rotation-y={Math.PI}>
-        <meshStandardMaterial map={map} metalness={0.35} roughness={0.36} />
+        <meshStandardMaterial ref={labelMaterialRef} map={label} metalness={0.35} roughness={0.36} />
       </mesh>
       <mesh geometry={top} material={aluminum} />
       <mesh geometry={bottom} material={aluminum} />
