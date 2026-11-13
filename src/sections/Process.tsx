@@ -24,11 +24,15 @@ function ProcessPinned() {
   const canSlot = useRef<HTMLDivElement>(null)
   const clock = useRef<HTMLSpanElement>(null)
   const isDesktop = useMediaQuery('(min-width: 768px)')
+  const isWide = useMediaQuery('(min-width: 1280px)')
 
   useGSAP(
     () => {
       const state: ProcessState = { enter: 0, step: 0, fill: 0 }
-      const renderer = createProcessRenderer(canvas.current!, isDesktop ? 'full' : 'lite')
+      const renderer = createProcessRenderer(
+        canvas.current!,
+        isWide ? 'full' : isDesktop ? 'medium' : 'lite',
+      )
 
       // The canvas needs to know where the SVG can sits to aim the drops at it.
       const measure = () => {
@@ -168,7 +172,7 @@ function ProcessPinned() {
         gsap.ticker.remove(render)
       }
     },
-    { scope: section, dependencies: [isDesktop], revertOnUpdate: true },
+    { scope: section, dependencies: [isDesktop, isWide], revertOnUpdate: true },
   )
 
   return (

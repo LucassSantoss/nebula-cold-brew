@@ -143,14 +143,24 @@ function drawDrop(ctx: CanvasRenderingContext2D, x: number, y: number, radius: n
 
 /**
  * Draws the bean → powder → drops story on a 2D canvas. `density` trades
- * particle count for speed on small screens.
+ * particle count for speed on smaller screens.
  */
-export function createProcessRenderer(canvas: HTMLCanvasElement, density: 'full' | 'lite') {
+export type ProcessDensity = keyof typeof DENSITIES
+
+const DENSITIES = {
+  full: { particles: 640, drops: 8, shards: 16, particleScale: 1 },
+  medium: { particles: 400, drops: 8, shards: 12, particleScale: 1 },
+  lite: { particles: 220, drops: 5, shards: 0, particleScale: 0.7 },
+}
+
+export function createProcessRenderer(canvas: HTMLCanvasElement, density: ProcessDensity) {
   const ctx = canvas.getContext('2d')!
-  const particleCount = density === 'full' ? 640 : 220
-  const dropCount = density === 'full' ? 8 : 5
-  const shardCount = density === 'full' ? 16 : 0
-  const particleScale = density === 'full' ? 1 : 0.7
+  const {
+    particles: particleCount,
+    drops: dropCount,
+    shards: shardCount,
+    particleScale,
+  } = DENSITIES[density]
 
   // Grouped by color so each shade is filled with a single path per frame.
   const groups: Particle[][] = POWDER_SHADES.map(() => [])

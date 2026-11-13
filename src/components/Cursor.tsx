@@ -14,7 +14,7 @@ const INTERACTIVE = '[data-cursor], a, button'
  */
 export function Cursor() {
   const circle = useRef<HTMLDivElement>(null)
-  const hasMouse = useMediaQuery('(hover: hover) and (pointer: fine)')
+  const hasMouse = useMediaQuery('(hover: hover) and (pointer: fine) and (min-width: 768px)')
   const reducedMotion = useReducedMotion()
   const enabled = hasMouse && !reducedMotion
 
