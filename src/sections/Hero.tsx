@@ -68,7 +68,7 @@ export function Hero() {
           },
           0,
         )
-        .to(anchor, { scale: 0.05, ease: 'power2.in' }, 0)
+        .to(anchor, { scale: 0, ease: 'power2.in' }, 0)
         .to('[data-title-left]', { xPercent: -30, autoAlpha: 0 }, 0)
         .to('[data-title-right]', { xPercent: 30, autoAlpha: 0 }, 0)
         .to('[data-hero-exit]', { autoAlpha: 0, duration: 0.3 }, 0)
