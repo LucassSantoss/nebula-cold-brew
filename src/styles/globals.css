@@ -56,6 +56,18 @@
 
   --animate-scroll-hint: scroll-hint 2s var(--ease-out-expo) infinite;
 
+  --animate-float: float 5s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(-7px) rotate(-4deg);
+    }
+    50% {
+      transform: translateY(7px) rotate(4deg);
+    }
+  }
+
   @keyframes scroll-hint {
     from {
       transform: translateY(-100%);
