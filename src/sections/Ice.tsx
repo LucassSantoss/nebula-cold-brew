@@ -74,7 +74,7 @@ export function Ice() {
     () => {
       const scrollTrigger = { trigger: section.current, start: 'top 55%', once: true }
       if (reducedMotion) {
-        gsap.from('[data-ice-copy]', { autoAlpha: 0, duration: 0.6, scrollTrigger })
+        gsap.from('[data-ice-copy]', { opacity: 0, duration: 0.6, scrollTrigger })
         return
       }
 
@@ -83,7 +83,7 @@ export function Ice() {
       gsap
         .timeline({ scrollTrigger, defaults: { ease: 'expo.out' } })
         .from('[data-char]', { yPercent: 115, duration: 1.1, stagger: 0.035 }, 0)
-        .from('[data-ice-copy]', { autoAlpha: 0, y: 28, duration: 1, stagger: 0.1 }, 0.3)
+        .from('[data-ice-copy]', { opacity: 0, y: 28, duration: 1, stagger: 0.1 }, 0.3)
         .to(
           degrees,
           {

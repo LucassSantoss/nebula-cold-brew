@@ -49,7 +49,7 @@ export function Navbar() {
         aria-label="Principal"
         className="relative z-10 flex items-center justify-between px-5 py-4 md:px-10 md:py-6"
       >
-        <a href="#top" aria-label="Nébula — voltar ao topo" onClick={closeMenu}>
+        <a href="#top" onClick={closeMenu}>
           <Logo className="text-3xl md:text-4xl" />
         </a>
 

@@ -10,7 +10,7 @@ export function ProcessStatic() {
   useGSAP(
     () => {
       gsap.from('[data-step]', {
-        autoAlpha: 0,
+        opacity: 0,
         duration: 0.6,
         stagger: 0.12,
         scrollTrigger: { trigger: section.current, start: 'top 75%', once: true },

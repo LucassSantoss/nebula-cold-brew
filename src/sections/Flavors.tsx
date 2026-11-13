@@ -148,7 +148,6 @@ export function Flavors() {
     () => {
       shown.current = null
       gsap.set('[data-slide]', { yPercent: 110 })
-      gsap.set('[data-ingredient]', { autoAlpha: 0 })
 
       ScrollTrigger.create({
         trigger: section.current,
@@ -158,7 +157,7 @@ export function Flavors() {
       })
 
       gsap.from('[data-flavors-ui]', {
-        autoAlpha: 0,
+        opacity: 0,
         y: reducedMotion ? 0 : 36,
         duration: 0.9,
         ease: 'expo.out',

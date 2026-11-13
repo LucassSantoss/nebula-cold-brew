@@ -31,7 +31,7 @@ export function Stats() {
       })
       if (reducedMotion) {
         gsap.from(items, {
-          autoAlpha: 0,
+          opacity: 0,
           duration: 0.6,
           stagger: 0.1,
           scrollTrigger: { trigger: section.current, start: 'top 70%', once: true },
@@ -40,7 +40,7 @@ export function Stats() {
       }
 
       gsap.from('[data-stats-heading]', {
-        autoAlpha: 0,
+        opacity: 0,
         y: 40,
         duration: 1,
         ease: 'expo.out',
@@ -57,7 +57,7 @@ export function Stats() {
             delay: index * 0.12,
             scrollTrigger: { trigger: item, start: 'top 85%', once: true },
           })
-          .from(item, { autoAlpha: 0, y: 40, duration: 0.9, ease: 'expo.out' }, 0)
+          .from(item, { opacity: 0, y: 40, duration: 0.9, ease: 'expo.out' }, 0)
           .fromTo(
             item.querySelector('[data-ring]'),
             { strokeDashoffset: ringOffset(stat.from > stat.value ? 1 : 0) },

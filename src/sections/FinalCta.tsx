@@ -18,14 +18,14 @@ export function FinalCta() {
     () => {
       const scrollTrigger = { trigger: section.current, start: 'top 55%', once: true }
       if (reducedMotion) {
-        gsap.from('[data-cta-copy]', { autoAlpha: 0, duration: 0.6, scrollTrigger })
+        gsap.from('[data-cta-copy]', { opacity: 0, duration: 0.6, scrollTrigger })
         return
       }
 
       gsap
         .timeline({ scrollTrigger, defaults: { ease: 'expo.out' } })
         .from('[data-char]', { yPercent: 115, duration: 1.1, stagger: 0.03 }, 0)
-        .from('[data-cta-copy]', { autoAlpha: 0, y: 28, duration: 1, stagger: 0.1 }, 0.35)
+        .from('[data-cta-copy]', { opacity: 0, y: 28, duration: 1, stagger: 0.1 }, 0.35)
 
       // The oversized can drifts against the scroll for a little extra depth.
       gsap.fromTo(

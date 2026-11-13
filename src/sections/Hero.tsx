@@ -21,7 +21,7 @@ export function Hero() {
     () => {
       if (reducedMotion) {
         sceneMotion.beanBurst = 1
-        gsap.from(section.current, { autoAlpha: 0, duration: 0.8, paused: !introDone })
+        gsap.from(section.current, { opacity: 0, duration: 0.8, paused: !introDone })
         return
       }
 
@@ -31,7 +31,7 @@ export function Hero() {
         .from('[data-can-intro]', { yPercent: 35, scale: 0.55, duration: 1.8 }, 0)
         .from(sceneMotion, { canSpin: -Math.PI * 1.5, duration: 2.4, ease: 'power3.out' }, 0)
         .fromTo(sceneMotion, { beanBurst: 0 }, { beanBurst: 1, duration: 2, ease: 'none' }, 0)
-        .from('[data-hero-fade]', { autoAlpha: 0, y: 28, duration: 1, stagger: 0.12 }, 0.8)
+        .from('[data-hero-fade]', { opacity: 0, y: 28, duration: 1, stagger: 0.12 }, 0.8)
     },
     { scope: section, dependencies: [reducedMotion, introDone], revertOnUpdate: true },
   )
@@ -70,9 +70,9 @@ export function Hero() {
           0,
         )
         .to(anchor, { scale: 0, ease: 'power2.in' }, 0)
-        .to('[data-title-left]', { xPercent: -30, autoAlpha: 0 }, 0)
-        .to('[data-title-right]', { xPercent: 30, autoAlpha: 0 }, 0)
-        .to('[data-hero-exit]', { autoAlpha: 0, duration: 0.3 }, 0)
+        .to('[data-title-left]', { xPercent: -30, opacity: 0 }, 0)
+        .to('[data-title-right]', { xPercent: 30, opacity: 0 }, 0)
+        .to('[data-hero-exit]', { opacity: 0, duration: 0.3 }, 0)
     },
     { scope: section, dependencies: [reducedMotion], revertOnUpdate: true },
   )

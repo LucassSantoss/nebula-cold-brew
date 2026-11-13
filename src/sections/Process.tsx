@@ -72,7 +72,7 @@ function ProcessPinned() {
         scrollTrigger: { trigger: section.current, start: 'top bottom', end: 'top top', scrub: true },
       })
       gsap.from('[data-process-heading]', {
-        autoAlpha: 0,
+        opacity: 0,
         y: 40,
         duration: 1,
         ease: 'expo.out',
