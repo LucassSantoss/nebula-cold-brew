@@ -2,6 +2,7 @@ export function Stats() {
   return (
     <section
       id="numeros"
+      data-theme="base"
       aria-labelledby="numeros-title"
       className="relative grid min-h-svh place-items-center px-5 py-24 md:px-10"
     >

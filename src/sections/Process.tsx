@@ -172,7 +172,7 @@ function ProcessPinned() {
   )
 
   return (
-    <section ref={section} id="origem" aria-labelledby="origem-title" className="relative">
+    <section ref={section} id="origem" data-theme="surface" aria-labelledby="origem-title" className="relative">
       <div ref={stage} className="relative h-svh overflow-hidden">
         <canvas ref={canvas} aria-hidden="true" className="absolute inset-0 size-full" />
 

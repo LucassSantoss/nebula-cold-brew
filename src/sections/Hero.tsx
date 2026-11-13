@@ -80,6 +80,7 @@ export function Hero() {
     <section
       ref={section}
       id="top"
+      data-theme="base"
       data-3d
       aria-labelledby="top-title"
       className="relative flex min-h-svh flex-col overflow-clip px-5 pt-24 pb-8 md:px-10 md:pt-28 md:pb-10"

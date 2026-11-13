@@ -3,7 +3,7 @@ import { SITE } from '../lib/site'
 
 export function Footer() {
   return (
-    <footer className="relative px-5 py-16 md:px-10">
+    <footer data-theme="base" className="relative px-5 py-16 md:px-10">
       <Logo className="text-4xl" />
       <p className="mt-6 text-sm text-ink-muted">
         Projeto fictício para portfólio — não é um produto real.

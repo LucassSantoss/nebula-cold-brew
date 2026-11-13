@@ -2,6 +2,7 @@ export function FinalCta() {
   return (
     <section
       id="comprar"
+      data-theme="flavor"
       aria-labelledby="comprar-title"
       className="relative grid min-h-svh place-items-center px-5 py-24 md:px-10"
     >

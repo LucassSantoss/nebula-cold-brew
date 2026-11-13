@@ -23,6 +23,7 @@ export function ProcessStatic() {
     <section
       ref={section}
       id="origem"
+      data-theme="surface"
       aria-labelledby="origem-title"
       className="relative px-5 py-24 md:px-10 md:py-36"
     >

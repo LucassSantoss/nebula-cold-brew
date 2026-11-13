@@ -2,6 +2,7 @@ export function Ice() {
   return (
     <section
       id="gelo"
+      data-theme="ice"
       aria-labelledby="gelo-title"
       className="relative grid min-h-svh place-items-center px-5 py-24 md:px-10"
     >

@@ -2,6 +2,7 @@ export function Testimonials() {
   return (
     <section
       id="relatos"
+      data-theme="surface"
       aria-labelledby="relatos-title"
       className="relative grid min-h-svh place-items-center px-5 py-24 md:px-10"
     >
