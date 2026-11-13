@@ -68,6 +68,22 @@
     }
   }
 
+  --animate-drip: drip 1.3s ease-in infinite;
+
+  @keyframes drip {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(4.5rem) scale(0.5);
+    }
+  }
+
   @keyframes scroll-hint {
     from {
       transform: translateY(-100%);
@@ -120,7 +136,8 @@
   .display {
     font-family: var(--font-display);
     font-weight: 400;
-    line-height: 0.92;
+    /* Just enough room for accented capitals (Á, Ã, É) on wrapped lines. */
+    line-height: 1.04;
     letter-spacing: -0.015em;
     text-transform: uppercase;
   }
