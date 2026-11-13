@@ -27,6 +27,7 @@
   --muted: #8a7663;
 
   /* Live page theme. Rewritten at runtime as sections and flavors change. */
+  --stars-opacity: 1;
   --page-bg: var(--bg);
   --page-fg: var(--cream);
   --page-muted: var(--muted);
@@ -81,6 +82,26 @@
     100% {
       opacity: 0;
       transform: translateY(4.5rem) scale(0.5);
+    }
+  }
+
+  --animate-twinkle: twinkle 6s ease-in-out infinite;
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+
+  --animate-fade-in: fade-in 0.4s 0.25s both;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
     }
   }
 
@@ -149,6 +170,48 @@
     line-height: 1;
     letter-spacing: 0.22em;
     text-transform: uppercase;
+  }
+
+  /* Custom cursor: a wrapper moved by JS and a shape that morphs per mode. */
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .cursor-shape {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: -1.25rem 0 0 -1.25rem;
+    border: 1.5px solid var(--page-fg);
+    border-radius: 50%;
+    opacity: 0;
+    transition:
+      transform 0.4s var(--ease-out-expo),
+      border-radius 0.4s var(--ease-out-expo),
+      border-color 0.3s,
+      background-color 0.3s,
+      opacity 0.3s;
+  }
+
+  .cursor[data-visible] .cursor-shape {
+    opacity: 0.9;
+  }
+
+  .cursor[data-mode='link'] .cursor-shape {
+    transform: scale(1.7);
+    background-color: color-mix(in srgb, var(--page-fg) 14%, transparent);
+  }
+
+  /* A square with one sharp corner, turned 45 degrees, reads as a drop. */
+  .cursor[data-mode='drop'] .cursor-shape {
+    transform: translateY(1.4rem) scale(1.25) rotate(45deg);
+    border-color: var(--page-accent-ink);
+    border-radius: 0 50% 50% 50%;
+    background-color: color-mix(in srgb, var(--page-accent-ink) 18%, transparent);
   }
 
   /* Underline that wipes in from the left and leaves to the right. */
