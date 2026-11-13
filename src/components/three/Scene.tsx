@@ -64,6 +64,8 @@ export default function Scene() {
       style={{ visibility: active ? 'visible' : 'hidden' }}
     >
       <Canvas
+        // The canvas only draws: it must never swallow clicks meant for the page below.
+        style={{ pointerEvents: 'none' }}
         frameloop={active ? 'always' : 'never'}
         dpr={[1, 2]}
         camera={{ fov: 30, position: [0, 0, 16], near: 1, far: 60 }}
