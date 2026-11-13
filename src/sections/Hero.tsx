@@ -84,7 +84,7 @@ export function Hero() {
       data-theme="base"
       data-3d
       aria-labelledby="top-title"
-      className="relative flex min-h-svh flex-col overflow-clip px-5 pt-24 pb-8 md:px-10 md:pt-28 md:pb-10"
+      className="relative flex min-h-svh flex-col overflow-clip px-5 pt-24 pb-8 [--hero-can:min(64svh,52vw)] md:px-10 md:pt-28 md:pb-10"
     >
       {/*
         Mobile: three centered lines above the can.
@@ -94,7 +94,7 @@ export function Hero() {
       <h1
         id="top-title"
         aria-label="Café gelado de outra galáxia"
-        className="display relative z-30 flex flex-wrap justify-center gap-x-[0.22em] text-[15.5vw] leading-[1.18] md:absolute md:inset-x-10 md:top-1/2 md:grid md:-translate-y-[54%] md:grid-cols-2 md:gap-x-[calc(64svh*0.4115+7vw)] md:text-[clamp(4rem,8.8vw,11rem)]"
+        className="display relative z-30 flex flex-wrap justify-center gap-x-[0.22em] text-[15.5vw] leading-[1.18] md:absolute md:inset-x-10 md:top-1/2 md:grid md:-translate-y-[54%] md:grid-cols-2 md:gap-x-[calc(var(--hero-can)*0.4115+7vw)] md:text-[min(7.4vw,14.5svh)] lg:text-[clamp(4rem,min(8.8vw,14.5svh),11rem)]"
       >
         <span data-title-left className="md:text-right">
           <SplitText text="Café" />
@@ -112,12 +112,12 @@ export function Hero() {
 
       <div className="flex flex-1 items-center justify-center py-4 md:absolute md:inset-0 md:py-0">
         <div data-can-exit>
-          <div data-can-intro ref={canAnchor} className="aspect-[200/486] h-[36svh] md:h-[64svh]" />
+          <div data-can-intro ref={canAnchor} className="aspect-[200/486] h-[36svh] md:h-(--hero-can)" />
         </div>
       </div>
 
       <div data-hero-exit className="relative z-30 mt-auto flex items-end justify-between gap-8">
-        <div className="max-w-sm">
+        <div className="max-w-sm md:max-w-64 xl:max-w-sm">
           <p data-hero-fade className="text-ink-muted">
             Cold brew extraído a frio por 12 horas e enlatado no ponto exato. Encorpado, cremoso e
             sem açúcar adicionado.
@@ -137,11 +137,11 @@ export function Hero() {
         <div
           data-hero-fade
           aria-hidden="true"
-          className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex"
+          className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:tall:flex"
         >
           <span className="eyebrow text-ink-muted">Role para baixo</span>
           <span className="relative h-12 w-px overflow-hidden bg-ink/20">
-            <span className="absolute inset-x-0 top-0 h-1/2 animate-scroll-hint bg-ink" />
+            <span className="absolute inset-x-0 top-0 h-1/2 bg-ink motion-safe:animate-scroll-hint" />
           </span>
         </div>
 

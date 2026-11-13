@@ -247,13 +247,13 @@ export function Flavors() {
       >
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-[44%] grid -translate-y-1/2 overflow-hidden text-center"
+          className="absolute inset-x-0 top-1/2 grid -translate-y-1/2 overflow-hidden text-center tall:top-[44%]"
         >
           {FLAVORS.map((flavor, index) => (
             <span
               key={flavor.id}
               data-slide={index}
-              className="display col-start-1 row-start-1 text-[24vw] leading-none text-pop md:text-[21vw]"
+              className="display col-start-1 row-start-1 text-[24vw] leading-none text-pop md:text-[min(21vw,32svh)]"
             >
               {flavor.name}
             </span>
@@ -289,9 +289,9 @@ export function Flavors() {
           </div>
         ))}
 
-        <div className="absolute inset-x-0 top-[44%] flex -translate-y-1/2 justify-center">
+        <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center tall:top-[44%]">
           <div data-can-enter>
-            <div ref={canAnchor} className="aspect-[200/486] h-[40svh] md:h-[60svh]" />
+            <div ref={canAnchor} className="aspect-[200/486] h-[40svh] md:h-[min(60svh,58vw)]" />
           </div>
         </div>
       </div>
@@ -299,16 +299,16 @@ export function Flavors() {
       <div data-flavors-ui className="pointer-events-none relative flex items-start justify-between gap-6">
         <div>
           <p className="eyebrow mb-4 text-ink-muted">Sabores</p>
-          <h2 id="sabores-title" className="display text-4xl md:text-6xl">
+          <h2 id="sabores-title" className="display max-w-xs text-4xl md:text-6xl xl:max-w-none">
             Escolha sua órbita
           </h2>
         </div>
-        <p aria-hidden="true" className="eyebrow pt-1 text-ink-muted tabular-nums">
+        <p aria-hidden="true" className="eyebrow shrink-0 pt-1 whitespace-nowrap text-ink-muted tabular-nums">
           {String(active + 1).padStart(2, '0')} / {String(FLAVORS.length).padStart(2, '0')}
         </p>
       </div>
 
-      <div className="pointer-events-none relative mt-auto grid items-end gap-5 md:grid-cols-[1fr_auto_1fr]">
+      <div className="pointer-events-none relative mt-auto grid items-end gap-5 lg:grid-cols-[1fr_auto_1fr]">
         <div
           data-flavors-ui
           role="tabpanel"
@@ -338,7 +338,7 @@ export function Flavors() {
           role="tablist"
           aria-label="Sabores"
           onKeyDown={onTabKeyDown}
-          className="pointer-events-auto flex justify-between gap-1.5 md:justify-center md:gap-2"
+          className="pointer-events-auto flex justify-between gap-1.5 md:justify-start md:gap-2 lg:justify-center"
         >
           {FLAVORS.map((flavor, index) => (
             <button
@@ -364,7 +364,7 @@ export function Flavors() {
           ))}
         </div>
 
-        <div data-flavors-ui className="pointer-events-auto hidden justify-end gap-3 md:flex">
+        <div data-flavors-ui className="pointer-events-auto hidden justify-end gap-3 lg:flex">
           {[
             { towards: -1, label: 'Sabor anterior', path: 'M14 6l-6 6 6 6' },
             { towards: 1, label: 'Próximo sabor', path: 'M10 6l6 6-6 6' },

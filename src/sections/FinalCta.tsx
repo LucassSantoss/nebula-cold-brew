@@ -70,7 +70,7 @@ export function FinalCta() {
         <h2
           id="comprar-title"
           aria-label="Pronto para decolar?"
-          className="display text-[17.5vw] leading-[1.05] md:text-[8.6vw]"
+          className="display text-[17.5vw] leading-[1.05] md:text-[7.4vw] lg:text-[8.6vw]"
         >
           <SplitText text="Pronto para" className="block" />
           <SplitText text="decolar?" className="block text-pop" />
@@ -94,7 +94,7 @@ export function FinalCta() {
         className="pointer-events-none flex justify-center pt-6 pb-16 md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:items-center md:p-0"
       >
         <div data-can-parallax>
-          <div ref={canAnchor} className="aspect-[200/486] h-[82svh] md:h-[112svh]" />
+          <div ref={canAnchor} className="aspect-[200/486] h-[82svh] md:h-[min(112svh,100vw)]" />
         </div>
       </div>
     </section>

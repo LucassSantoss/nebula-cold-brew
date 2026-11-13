@@ -37,6 +37,9 @@
   color-scheme: dark;
 }
 
+/* Viewports with enough height for optional chrome such as the scroll hint. */
+@custom-variant tall (@media (min-height: 800px));
+
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
