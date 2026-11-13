@@ -4,6 +4,7 @@ import { MathUtils, type Group } from 'three'
 import { getCanAnchors, type CanAnchorId } from '../../lib/canAnchors'
 import { FLAVORS } from '../../lib/flavors'
 import { pointer } from '../../lib/pointer'
+import { sceneMotion } from '../../lib/sceneMotion'
 import { useStore } from '../../lib/store'
 import { useReducedMotion } from '../../lib/useReducedMotion'
 import { Can } from './Can'
@@ -21,6 +22,7 @@ const TILT: Record<CanAnchorId, number> = { hero: -0.14, flavors: 0.06, cta: -0.
 export function CanRig() {
   const group = useRef<Group>(null)
   const sway = useRef({ x: 0, y: 0 })
+  const reveal = useRef(0)
   const flavor = useStore((state) => state.flavor)
   const reducedMotion = useReducedMotion()
 
@@ -45,14 +47,17 @@ export function CanRig() {
     can.visible = activeId !== null
     if (!activeId || !activeRect) return
 
+    // Ease in on the first frames so a late-loading scene does not pop.
+    reveal.current = MathUtils.damp(reveal.current, 1, 5, delta)
+
     const unitsPerPixel = viewport.height / size.height
-    const scale = (activeRect.height * unitsPerPixel) / CAN_HEIGHT
+    const scale = ((activeRect.height * unitsPerPixel) / CAN_HEIGHT) * reveal.current
     can.position.x = (activeRect.left + activeRect.width / 2 - size.width / 2) * unitsPerPixel
     can.position.y = -(activeRect.top + activeRect.height / 2 - size.height / 2) * unitsPerPixel
     can.scale.setScalar(scale)
 
     if (reducedMotion) {
-      can.rotation.set(0, 0, TILT[activeId])
+      can.rotation.set(0, sceneMotion.canSpin, TILT[activeId])
       return
     }
 
@@ -62,7 +67,8 @@ export function CanRig() {
 
     can.position.y += Math.sin(time * 1.1) * 0.1 * scale
     can.rotation.x = -sway.current.y * 0.1
-    can.rotation.y = time * 0.35 + sway.current.x * 0.35
+    can.rotation.y =
+      time * 0.35 + window.scrollY * 0.0025 + sceneMotion.canSpin + sway.current.x * 0.35
     can.rotation.z = TILT[activeId] + Math.sin(time * 0.7) * 0.02
   })
 

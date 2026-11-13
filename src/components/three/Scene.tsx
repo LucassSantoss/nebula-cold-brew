@@ -2,6 +2,7 @@ import { Environment, Lightformer } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { use, useEffect, useState } from 'react'
 import { NeutralToneMapping } from 'three'
+import { Beans } from './Beans'
 import { CanRig } from './CanRig'
 
 // Label artwork is drawn with the page fonts, so they must be ready first.
@@ -75,6 +76,7 @@ export default function Scene() {
         <ambientLight intensity={0.5} />
         <directionalLight position={[4, 6, 8]} intensity={1.6} />
         <CanRig />
+        <Beans />
       </Canvas>
     </div>
   )
