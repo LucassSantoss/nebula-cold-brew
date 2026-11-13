@@ -108,7 +108,7 @@ export function Ice() {
       aria-labelledby="gelo-title"
       className="relative h-svh min-h-[36rem] overflow-hidden"
     >
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-5 pb-16 text-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-5 pb-[24svh] text-center">
         <p data-ice-copy className="eyebrow mb-6 text-ink-muted">
           Frio de verdade
         </p>

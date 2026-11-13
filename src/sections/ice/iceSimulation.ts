@@ -36,7 +36,9 @@ const SIZE_BUCKETS = [0.78, 1, 1.24]
 const SPRITE_PADDING = 14
 const MAX_SPEED = 42
 
-const cubeBaseSize = (width: number) => Math.min(132, Math.max(58, width * 0.085))
+/** Scales with the canvas, and with its height too, so short viewports are not buried in ice. */
+const cubeBaseSize = (width: number, height: number) =>
+  Math.min(132, Math.max(58, Math.min(width * 0.085, height * 0.13)))
 
 /** Paints one ice cube into an offscreen canvas, so drawing it later is a single blit. */
 function createSprite(size: number, dpr: number): HTMLCanvasElement {
@@ -146,7 +148,7 @@ export function createIceSimulation(canvas: HTMLCanvasElement, { count, frozen }
     canvas.width = Math.round(width * dpr)
     canvas.height = Math.round(height * dpr)
 
-    const nextBase = cubeBaseSize(width)
+    const nextBase = cubeBaseSize(width, height)
     if (nextBase !== baseSize) {
       // Keep existing cubes proportional to the new viewport.
       if (baseSize) cubes.forEach(({ body }) => Body.scale(body, nextBase / baseSize, nextBase / baseSize))
